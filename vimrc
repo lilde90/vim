@@ -1,10 +1,5 @@
-"map <F9> :call SaveInputData()<CR>
-""func! SaveInputData()
-""	exec "tabnew"
-""	exec 'normal "+gP'
-""	exec "w! /tmp/input_data"
-""endfunc
-
+"vimrc configuration file by lilde90
+"
 "colorschme setting: torte, murphy, desert, elflord, ron
 syntax on             
 colorscheme desert
