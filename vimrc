@@ -77,8 +77,6 @@ func! Rungdb()
     exec "!gdb ./%<"
 endfunc
 
-
-
 set autoread
 autocmd FileType c,cpp map <buffer> <leader><space> :w<cr>:make<cr>
 set completeopt=preview,menu 
