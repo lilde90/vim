@@ -25,13 +25,13 @@ endif
 autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java,*.idl,*.hpp exec ":call SetTitle()" 
 func SetTitle() 
     if &filetype == 'sh' 
-        call setline(1, "\# Copyright ".strftime("%Y")." Baidu Inc. All Rights Reserved.") 
-        call append(line("."), "\# Author: Li Pan (lipan08@baidu.com)") 
+        call setline(1, "\# Copyright ".strftime("%Y")." lilde90. All Rights Reserved.") 
+        call append(line("."), "\# Author: Pan Li (panli.me@gmail.com)") 
         call append(line(".")+1, "\#!/bin/bash") 
         call append(line(".")+2, "\#") 
     else
-        call setline(1, "\/\/ Copyright ".strftime("%Y")." Baidu Inc. All Rights Reserved.") 
-        call append(line("."), "\/\/ Author: Li Pan (lipan08@baidu.com)") 
+        call setline(1, "\/\/ Copyright ".strftime("%Y")." lilde90. All Rights Reserved.") 
+        call append(line("."), "\/\/ Author: Pan Li (panli.me@baidu.com)") 
         call append(line(".")+1, "\/\/") 
     endif
     autocmd BufNewFile * normal G
