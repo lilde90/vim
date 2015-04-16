@@ -157,9 +157,10 @@ filetype plugin indent on
 set completeopt=longest,menu
 
 " tags setting
-set tags+=~/dev/tags
-set tags+=~/dev/usr_include.tags
-cs add ~/dev/cscope.out ~/dev/
+set tags+=~/code/tags
+set tags+=~/github/tags
+cs add ~/code/cscope.out ~/code/
+cs add ~/github/cscope.out ~/github/
 
 "NERD setting
 let NERDChristmasTree=1
