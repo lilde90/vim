@@ -31,7 +31,7 @@ func SetTitle()
         call append(line(".")+2, "\#") 
     else
         call setline(1, "\/\/ Copyright ".strftime("%Y")." lilde90. All Rights Reserved.") 
-        call append(line("."), "\/\/ Author: Pan Li (panli.me@baidu.com)") 
+        call append(line("."), "\/\/ Author: Pan Li (panli.me@gmail.com)") 
         call append(line(".")+1, "\/\/") 
     endif
     autocmd BufNewFile * normal G
