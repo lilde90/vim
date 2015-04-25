@@ -80,39 +80,39 @@ endfunc
 "
 "map <C-A> ggVGY
 "map! <C-A> <Esc>ggVGY
-"map <F12> gg=G
-"vmap <C-c> "+y
-"nnoremap <F2> :g/^\s*$/d<CR> 
-"nnoremap <C-F2> :vert diffsplit 
-"map <M-F2> :tabnew<CR>  
-"map <F3> :tabnew .<CR>  
-"map <C-F3> \be  
-"map <F5> :call CompileRunGcc()<CR>
-"func! CompileRunGcc()
-"    exec "w"
-"    if &filetype == 'c'
-"        exec "!g++ % -o %<"
-"        exec "! ./%<"
-"    elseif &filetype == 'cpp'
-"        exec "!g++ % -o %<"
-"        exec "! ./%<"
-"    elseif &filetype == 'java' 
-"        exec "!javac %" 
-"        exec "!java %<"
-"    elseif &filetype == 'sh'
-"        :!./%
-"    elseif &filetype == 'py'
-"        exec "!python %"
-"        exec "!tb
-"endfunc
-""run gdb
-"map <F8> :call Rungdb()<CR>
-"func! Rungdb()
-"    exec "w"
-"    exec "!g++ % -g -o %<"
-"    exec "!gdb ./%<"
-"endfunc
-"
+map <F12> gg=G
+vmap <C-c> "+y
+nnoremap <F2> :g/^\s*$/d<CR> 
+nnoremap <C-F2> :vert diffsplit 
+map <M-F2> :tabnew<CR>  
+map <F3> :tabnew .<CR>  
+map <C-F3> \be  
+map <F5> :call CompileRunGcc()<CR>
+func! CompileRunGcc()
+    exec "w"
+    if &filetype == 'c'
+        exec "!g++ % -o %<"
+        exec "! ./%<"
+    elseif &filetype == 'cpp'
+        exec "!g++ % -o %<"
+        exec "! ./%<"
+    elseif &filetype == 'java' 
+        exec "!javac %" 
+        exec "!java %<"
+    elseif &filetype == 'sh'
+        :!./%
+    elseif &filetype == 'py'
+        exec "!python %"
+        exec "!tb
+endfunc
+"run gdb
+map <F8> :call Rungdb()<CR>
+func! Rungdb()
+    exec "w"
+    exec "!g++ % -g -o %<"
+    exec "!gdb ./%<"
+endfunc
+
 set autoread
 autocmd FileType c,cpp map <buffer> <leader><space> :w<cr>:make<cr>
 set completeopt=preview,menu 
