@@ -1,6 +1,44 @@
 "vimrc configuration file by lilde90
 "
-"colorschme setting: torte, murphy, desert, elflord, ron
+""NeoBundle Scripts-----------------------------
+if has('vim_starting')
+  if &compatible
+    set nocompatible               " Be iMproved
+  endif
+
+  " Required:
+  set runtimepath+=/Users/lilde90/.vim/bundle/neobundle.vim/
+
+
+endif
+
+" Required:
+call neobundle#begin(expand('/Users/lilde90/.vim/bundle'))
+
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" Add or remove your Bundles here:
+NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'ctrlpvim/ctrlp.vim'
+NeoBundle 'flazz/vim-colorschemes'
+NeoBundle 'scrooloose/syntastic'
+" You can specify revision/branch/tag.
+NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
+
+" Required:
+call neobundle#end()
+
+" Required:
+filetype plugin indent on
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+"End NeoBundle Scripts-------------------------colorschme setting: torte, murphy, desert, elflord, ron
 syntax on             
 colorscheme desert
 
@@ -8,7 +46,6 @@ set go=
 "autocmd InsertLeave * se nocul   
 ""autocmd InsertEnter * se cul    
 "set ruler            
-set showcmd          
 set novisualbell      
 set vb
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}    
@@ -19,7 +56,7 @@ set nocompatible
 
 "set fonts
 if (has("gui_running")) 
-   set guifont=Bitstream\ Vera\ Sans\ Mono\ 14 
+    set guifont=Bitstream\ Vera\ Sans\ Mono\ 14 
 endif 
 
 autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java,*.idl,*.hpp exec ":call SetTitle()" 
@@ -38,51 +75,51 @@ func SetTitle()
 endfunc 
 
 "keybord stroke
-nmap <leader>w :w!<cr>
-nmap <leader>f :find<cr>
-
-map <C-A> ggVGY
-map! <C-A> <Esc>ggVGY
-map <F12> gg=G
-vmap <C-c> "+y
-nnoremap <F2> :g/^\s*$/d<CR> 
-nnoremap <C-F2> :vert diffsplit 
-map <M-F2> :tabnew<CR>  
-map <F3> :tabnew .<CR>  
-map <C-F3> \be  
-map <F5> :call CompileRunGcc()<CR>
-func! CompileRunGcc()
-    exec "w"
-    if &filetype == 'c'
-        exec "!g++ % -o %<"
-        exec "! ./%<"
-    elseif &filetype == 'cpp'
-        exec "!g++ % -o %<"
-        exec "! ./%<"
-    elseif &filetype == 'java' 
-        exec "!javac %" 
-        exec "!java %<"
-    elseif &filetype == 'sh'
-        :!./%
-    elseif &filetype == 'py'
-        exec "!python %"
-        exec "!python %<"
-    endif
-endfunc
-"run gdb
-map <F8> :call Rungdb()<CR>
-func! Rungdb()
-    exec "w"
-    exec "!g++ % -g -o %<"
-    exec "!gdb ./%<"
-endfunc
-
+"nmap <leader>w :w!<cr>
+"nmap <leader>f :find<cr>
+"
+"map <C-A> ggVGY
+"map! <C-A> <Esc>ggVGY
+"map <F12> gg=G
+"vmap <C-c> "+y
+"nnoremap <F2> :g/^\s*$/d<CR> 
+"nnoremap <C-F2> :vert diffsplit 
+"map <M-F2> :tabnew<CR>  
+"map <F3> :tabnew .<CR>  
+"map <C-F3> \be  
+"map <F5> :call CompileRunGcc()<CR>
+"func! CompileRunGcc()
+"    exec "w"
+"    if &filetype == 'c'
+"        exec "!g++ % -o %<"
+"        exec "! ./%<"
+"    elseif &filetype == 'cpp'
+"        exec "!g++ % -o %<"
+"        exec "! ./%<"
+"    elseif &filetype == 'java' 
+"        exec "!javac %" 
+"        exec "!java %<"
+"    elseif &filetype == 'sh'
+"        :!./%
+"    elseif &filetype == 'py'
+"        exec "!python %"
+"        exec "!tb
+"endfunc
+""run gdb
+"map <F8> :call Rungdb()<CR>
+"func! Rungdb()
+"    exec "w"
+"    exec "!g++ % -g -o %<"
+"    exec "!gdb ./%<"
+"endfunc
+"
 set autoread
 autocmd FileType c,cpp map <buffer> <leader><space> :w<cr>:make<cr>
 set completeopt=preview,menu 
-filetype plugin on
+filetype plugin indent on
 set clipboard+=unnamed 
 set nobackup
+set nocompatible
 :set makeprg=g++\ -Wall\ \ %
 set autowrite
 set ruler                   
@@ -93,30 +130,33 @@ set foldcolumn=0
 set foldmethod=indent 
 set foldlevel=3 
 set foldenable              
-set nocompatible
 set noeb
 set confirm
 set autoindent
-set cindent
+set smartindent
 
 set tabstop=4
+set expandtab
 set softtabstop=4
 set shiftwidth=4
-set expandtab
 set smarttab
+set cindent
 
 set number
 set history=1000
 
-set nobackup
 set noswapfile
 
 set hlsearch
 set incsearch
 set gdefault
 
+set textwidth=100
+"set colorcolumn=100
 set laststatus=2
 set cmdheight=2
+set showcmd          
+
 filetype on
 filetype plugin on
 filetype indent on
@@ -135,7 +175,6 @@ set fillchars=vert:\ ,stl:\ ,stlnc:\
 set showmatch
 set matchtime=1
 set scrolloff=3
-set smartindent
 au BufRead,BufNewFile *  setfiletype txt
 
 :inoremap ( ()<ESC>i
@@ -153,7 +192,6 @@ function! ClosePair(char)
     endif
 endfunction
 
-filetype plugin indent on 
 set completeopt=longest,menu
 
 " tags setting
@@ -206,3 +244,13 @@ nmap <Up> <Nop>
 nmap <Down> <Nop>
 
 let OmniCpp_MayCompleteDot=1
+
+"syntastic setting"
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
