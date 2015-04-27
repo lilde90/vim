@@ -38,7 +38,8 @@ filetype plugin indent on
 " If there are uninstalled bundles found on startup,
 " this will conveniently prompt you to install them.
 NeoBundleCheck
-"End NeoBundle Scripts-------------------------colorschme setting: torte, murphy, desert, elflord, ron
+"End NeoBundle Scripts-----------------------------
+"colorschme setting: torte, murphy, desert, elflord, ron
 syntax on             
 colorscheme desert
 
