@@ -28,6 +28,7 @@ NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'scrooloose/syntastic'
 " You can specify revision/branch/tag.
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
+NeoBundle 'rust-lang/rust.vim'
 
 " Required:
 call neobundle#end()
@@ -131,7 +132,6 @@ set foldcolumn=0
 set foldmethod=indent 
 set foldlevel=3 
 set foldenable              
-set noeb
 set confirm
 set autoindent
 set smartindent
