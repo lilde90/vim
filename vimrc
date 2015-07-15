@@ -8,8 +8,6 @@ if has('vim_starting')
 
   " Required:
   set runtimepath+=/Users/lilde90/.vim/bundle/neobundle.vim/
-
-
 endif
 
 " Required:
@@ -26,9 +24,12 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'ctrlpvim/ctrlp.vim'
 NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'scrooloose/syntastic'
-" You can specify revision/branch/tag.
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
 NeoBundle 'rust-lang/rust.vim'
+NeoBundle 'MarcWeber/vim-addon-mw-utils'
+NeoBundle 'tomtom/tlib_vim'
+NeoBundle 'rizzatti/dash.vim'
+"NeoBundle 'garbas/vim-snippets'
 
 " Required:
 call neobundle#end()
@@ -42,7 +43,9 @@ NeoBundleCheck
 "End NeoBundle Scripts-----------------------------
 "colorschme setting: torte, murphy, desert, elflord, ron
 syntax on             
-colorscheme desert
+set background=light
+colorscheme solarized
+"colorscheme desert
 
 set go=              
 "autocmd InsertLeave * se nocul   

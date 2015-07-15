@@ -1,9 +1,12 @@
 ctrlp.vim
+dash.vim
 neobundle.vim
 neosnippet-snippets
 neosnippet.vim
 rust.vim
 syntastic
+tlib_vim
+vim-addon-mw-utils
 vim-colorschemes
 vim-fugitive
 vimshell
