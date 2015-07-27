@@ -43,9 +43,9 @@ NeoBundleCheck
 "End NeoBundle Scripts-----------------------------
 "colorschme setting: torte, murphy, desert, elflord, ron
 syntax on             
-set background=light
-colorscheme solarized
-"colorscheme desert
+"set background=dark
+"colorscheme solarized
+colorscheme desert
 
 set go=              
 "autocmd InsertLeave * se nocul   
