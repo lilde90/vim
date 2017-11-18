@@ -11,35 +11,35 @@ if has('vim_starting')
 endif
 
 " Required:
-call neobundle#begin(expand('/Users/lilde90/.vim/bundle'))
+"call neobundle#begin(expand('/Users/lilde90/.vim/bundle'))
 
 " Let NeoBundle manage NeoBundle
 " Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-" Add or remove your Bundles here:
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'ctrlpvim/ctrlp.vim'
-NeoBundle 'flazz/vim-colorschemes'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
-NeoBundle 'rust-lang/rust.vim'
-NeoBundle 'MarcWeber/vim-addon-mw-utils'
-NeoBundle 'tomtom/tlib_vim'
-NeoBundle 'rizzatti/dash.vim'
+"NeoBundleFetch 'Shougo/neobundle.vim'
+"
+"" Add or remove your Bundles here:
+"NeoBundle 'Shougo/neosnippet.vim'
+"NeoBundle 'Shougo/neosnippet-snippets'
+"NeoBundle 'tpope/vim-fugitive'
+"NeoBundle 'ctrlpvim/ctrlp.vim'
+"NeoBundle 'flazz/vim-colorschemes'
+"NeoBundle 'scrooloose/syntastic'
+"NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
+"NeoBundle 'rust-lang/rust.vim'
+"NeoBundle 'MarcWeber/vim-addon-mw-utils'
+"NeoBundle 'tomtom/tlib_vim'
+"NeoBundle 'rizzatti/dash.vim'
 "NeoBundle 'garbas/vim-snippets'
 
 " Required:
-call neobundle#end()
+"call neobundle#end()
 
 " Required:
 filetype plugin indent on
 
 " If there are uninstalled bundles found on startup,
 " this will conveniently prompt you to install them.
-NeoBundleCheck
+"NeoBundleCheck
 "End NeoBundle Scripts-----------------------------
 "colorschme setting: torte, murphy, desert, elflord, ron
 syntax on             
@@ -250,11 +250,11 @@ nmap <Down> <Nop>
 let OmniCpp_MayCompleteDot=1
 
 "syntastic setting"
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 0
+"let g:syntastic_check_on_wq = 0
