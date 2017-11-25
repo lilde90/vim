@@ -1,46 +1,43 @@
 "vimrc configuration file by lilde90
-"
-""NeoBundle Scripts-----------------------------
-if has('vim_starting')
-  if &compatible
-    set nocompatible               " Be iMproved
-  endif
-
-  " Required:
-  set runtimepath+=/Users/lilde90/.vim/bundle/neobundle.vim/
+"NeoBundle Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
 endif
 
 " Required:
-"call neobundle#begin(expand('/Users/lilde90/.vim/bundle'))
+set runtimepath+=/home/lilde90/.vim/bundle/neobundle.vim/
+
+" Required:
+call neobundle#begin(expand('/home/lilde90/.vim/bundle'))
 
 " Let NeoBundle manage NeoBundle
 " Required:
-"NeoBundleFetch 'Shougo/neobundle.vim'
-"
-"" Add or remove your Bundles here:
-"NeoBundle 'Shougo/neosnippet.vim'
-"NeoBundle 'Shougo/neosnippet-snippets'
-"NeoBundle 'tpope/vim-fugitive'
-"NeoBundle 'ctrlpvim/ctrlp.vim'
-"NeoBundle 'flazz/vim-colorschemes'
-"NeoBundle 'scrooloose/syntastic'
-"NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
-"NeoBundle 'rust-lang/rust.vim'
-"NeoBundle 'MarcWeber/vim-addon-mw-utils'
-"NeoBundle 'tomtom/tlib_vim'
-"NeoBundle 'rizzatti/dash.vim'
-"NeoBundle 'garbas/vim-snippets'
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" Add or remove your Bundles here:
+NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'ctrlpvim/ctrlp.vim'
+NeoBundle 'flazz/vim-colorschemes'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
+NeoBundle 'rust-lang/rust.vim'
+NeoBundle 'MarcWeber/vim-addon-mw-utils'
+NeoBundle 'tomtom/tlib_vim'
+NeoBundle 'rizzatti/dash.vim'
 
 " Required:
-"call neobundle#end()
+call neobundle#end()
 
 " Required:
 filetype plugin indent on
 
 " If there are uninstalled bundles found on startup,
 " this will conveniently prompt you to install them.
-"NeoBundleCheck
+NeoBundleCheck
 "End NeoBundle Scripts-----------------------------
+"
 "colorschme setting: torte, murphy, desert, elflord, ron
 syntax on             
 "set background=dark
