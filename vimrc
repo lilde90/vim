@@ -60,9 +60,9 @@ set foldmethod=manual
 set nocompatible  
 
 "set fonts
-if (has("gui_running")) 
-    set guifont=Bitstream\ Vera\ Sans\ Mono\ 14 
-endif 
+"if (has("gui_running")) 
+"    set guifont=Bitstream\ Vera\ Sans\ Mono\ 14 
+"endif 
 
 autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java,*.idl,*.hpp exec ":call SetTitle()" 
 func SetTitle() 
