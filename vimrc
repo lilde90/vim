@@ -5,37 +5,37 @@ if &compatible
 endif
 
 " Required:
-set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
+" set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
 
 " Required:
-call neobundle#begin(expand('$HOME/.vim/bundle'))
+" call neobundle#begin(expand('$HOME/.vim/bundle'))
 
 " Let NeoBundle manage NeoBundle
 " Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
+" NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Add or remove your Bundles here:
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'ctrlpvim/ctrlp.vim'
-NeoBundle 'flazz/vim-colorschemes'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
-NeoBundle 'rust-lang/rust.vim'
-NeoBundle 'MarcWeber/vim-addon-mw-utils'
-NeoBundle 'tomtom/tlib_vim'
-NeoBundle 'rizzatti/dash.vim'
+" NeoBundle 'Shougo/neosnippet.vim'
+" NeoBundle 'Shougo/neosnippet-snippets'
+" NeoBundle 'tpope/vim-fugitive'
+" NeoBundle 'ctrlpvim/ctrlp.vim'
+" NeoBundle 'flazz/vim-colorschemes'
+" NeoBundle 'scrooloose/syntastic'
+" NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
+" NeoBundle 'rust-lang/rust.vim'
+" NeoBundle 'MarcWeber/vim-addon-mw-utils'
+" NeoBundle 'tomtom/tlib_vim'
+" NeoBundle 'rizzatti/dash.vim'
 
 " Required:
-call neobundle#end()
+" call neobundle#end()
 
 " Required:
 filetype plugin indent on
 
 " If there are uninstalled bundles found on startup,
 " this will conveniently prompt you to install them.
-NeoBundleCheck
+" NeoBundleCheck
 "End NeoBundle Scripts-----------------------------
 "
 "colorschme setting: torte, murphy, desert, elflord, ron
