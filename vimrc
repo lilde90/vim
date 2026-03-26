@@ -1,257 +1,255 @@
-"vimrc configuration file by lilde90
-"NeoBundle Scripts-----------------------------
+" vimrc configuration file by lilde90
+
 if &compatible
-  set nocompatible               " Be iMproved
+  set nocompatible
 endif
 
-" Required:
-" set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
-
-" Required:
-" call neobundle#begin(expand('$HOME/.vim/bundle'))
-
-" Let NeoBundle manage NeoBundle
-" Required:
-" NeoBundleFetch 'Shougo/neobundle.vim'
-
-" Add or remove your Bundles here:
-" NeoBundle 'Shougo/neosnippet.vim'
-" NeoBundle 'Shougo/neosnippet-snippets'
-" NeoBundle 'tpope/vim-fugitive'
-" NeoBundle 'ctrlpvim/ctrlp.vim'
-" NeoBundle 'flazz/vim-colorschemes'
-" NeoBundle 'scrooloose/syntastic'
-" NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
-" NeoBundle 'rust-lang/rust.vim'
-" NeoBundle 'MarcWeber/vim-addon-mw-utils'
-" NeoBundle 'tomtom/tlib_vim'
-" NeoBundle 'rizzatti/dash.vim'
-
-" Required:
-" call neobundle#end()
-
-" Required:
+syntax on
 filetype plugin indent on
 
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-" NeoBundleCheck
-"End NeoBundle Scripts-----------------------------
-"
-"colorschme setting: torte, murphy, desert, elflord, ron
-syntax on             
-"set background=dark
-"colorscheme solarized
 colorscheme desert
 
-set go=              
-"autocmd InsertLeave * se nocul   
-""autocmd InsertEnter * se cul    
-"set ruler            
-set novisualbell      
+set novisualbell
 set vb
-set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}    
-set laststatus=1     
-set foldenable       
-set foldmethod=manual   
-set nocompatible  
-
-"set fonts
-"if (has("gui_running")) 
-"    set guifont=Bitstream\ Vera\ Sans\ Mono\ 14 
-"endif 
-
-autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java,*.idl,*.hpp exec ":call SetTitle()" 
-func SetTitle() 
-    if &filetype == 'sh' 
-        call setline(1, "\# Copyright ".strftime("%Y")." lilde90. All Rights Reserved.") 
-        call append(line("."), "\# Author: Pan Li (panli.me@gmail.com)") 
-        call append(line(".")+1, "\#!/bin/bash") 
-        call append(line(".")+2, "\#") 
-    else
-        call setline(1, "\/\/ Copyright ".strftime("%Y")." lilde90. All Rights Reserved.") 
-        call append(line("."), "\/\/ Author: Pan Li (panli.me@gmail.com)") 
-        call append(line(".")+1, "\/\/") 
-    endif
-    autocmd BufNewFile * normal G
-endfunc 
-
-"keybord stroke
-"nmap <leader>w :w!<cr>
-"nmap <leader>f :find<cr>
-"
-"map <C-A> ggVGY
-"map! <C-A> <Esc>ggVGY
-map <F12> gg=G
-vmap <C-c> "+y
-nnoremap <F2> :g/^\s*$/d<CR> 
-nnoremap <C-F2> :vert diffsplit 
-map <M-F2> :tabnew<CR>  
-map <F3> :tabnew .<CR>  
-map <C-F3> \be  
-map <F5> :call CompileRunGcc()<CR>
-func! CompileRunGcc()
-    exec "w"
-    if &filetype == 'c'
-        exec "!g++ % -o %<"
-        exec "! ./%<"
-    elseif &filetype == 'cpp'
-        exec "!g++ % -o %<"
-        exec "! ./%<"
-    elseif &filetype == 'java' 
-        exec "!javac %" 
-        exec "!java %<"
-    elseif &filetype == 'sh'
-        :!./%
-    elseif &filetype == 'py'
-        exec "!python %"
-        exec "!tb
-endfunc
-"run gdb
-map <F8> :call Rungdb()<CR>
-func! Rungdb()
-    exec "w"
-    exec "!g++ % -g -o %<"
-    exec "!gdb ./%<"
-endfunc
-
-set autoread
-autocmd FileType c,cpp map <buffer> <leader><space> :w<cr>:make<cr>
-set completeopt=preview,menu 
-filetype plugin indent on
-set clipboard+=unnamed 
-set nobackup
-set nocompatible
-:set makeprg=g++\ -Wall\ \ %
-set autowrite
-set ruler                   
-set magic                   
-set guioptions-=T          
-set guioptions-=m           
-set foldcolumn=0
-set foldmethod=indent 
-set foldlevel=3 
-set foldenable              
-set confirm
-set autoindent
-set smartindent
-
-set tabstop=2
-set expandtab
-set softtabstop=2
-set shiftwidth=2
-set smarttab
-set cindent
-
-set number
-set history=1000
-
-set noswapfile
-
-set hlsearch
-set incsearch
-set gdefault
-
-set textwidth=100
-"set colorcolumn=100
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
 set laststatus=2
 set cmdheight=2
-set showcmd          
-
-filetype on
-filetype plugin on
-filetype indent on
-set viminfo+=!
-
-set iskeyword+=_,$,@,%,#,-
-set linespace=0
+set showcmd
+set ruler
+set number
+set relativenumber
+set scrolloff=3
+set textwidth=100
 set wildmenu
-set backspace=2
+
+set autoread
+set autowrite
+set confirm
+set history=1000
+set magic
+set backspace=indent,eol,start
 set whichwrap+=<,>,h,l
 set mouse=a
 set selection=exclusive
 set selectmode=mouse,key
 set report=0
-set fillchars=vert:\ ,stl:\ ,stlnc:\
+set viminfo+=!
+
+set autoindent
+set smartindent
+set cindent
+
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set expandtab
+set smarttab
+
+set hlsearch
+set incsearch
+set gdefault
 set showmatch
 set matchtime=1
-set scrolloff=3
-au BufRead,BufNewFile *  setfiletype txt
 
-:inoremap ( ()<ESC>i
-:inoremap ) <c-r>=ClosePair(')')<CR>
-":inoremap { {<CR>}<ESC>O
-:inoremap } <c-r>=ClosePair('}')<CR>
-:inoremap [ []<ESC>i
-:inoremap ] <c-r>=ClosePair(']')<CR>
+set foldmethod=indent
+set foldlevel=3
+set foldcolumn=0
+set foldenable
 
-function! ClosePair(char)
-    if getline('.')[col('.') - 1] == a:char
-        return "\<Right>"
-    else
-        return a:char
-    endif
+set completeopt=menu,longest
+set iskeyword+=_,$,@,%,#,-
+
+set nobackup
+set noswapfile
+
+if has('clipboard')
+  set clipboard+=unnamed
+endif
+
+if has('gui_running')
+  set guioptions=
+  set linespace=0
+endif
+
+function! s:EchoError(message) abort
+  echohl ErrorMsg
+  echom a:message
+  echohl None
 endfunction
 
-set completeopt=longest,menu
+function! s:ClosePair(char) abort
+  if col('.') <= len(getline('.')) && getline('.')[col('.') - 1] ==# a:char
+    return "\<Right>"
+  endif
+  return a:char
+endfunction
 
-" tags setting
-set tags+=~/code/tags
-set tags+=~/github/tags
-cs add ~/code/cscope.out ~/code/
-cs add ~/github/cscope.out ~/github/
+function! SetTitle() abort
+  if line('$') > 1 || getline(1) !=# ''
+    return
+  endif
 
-"NERD setting
-let NERDChristmasTree=1
-let NERDTreeAutoCenter=1
-let NERDTreeBookmarksFile=$VIM.'\Data\NerdBookmarks.txt'
-let NERDTreeMouseMode=2
-let NERDTreeShowBookmarks=1
-let NERDTreeShowFiles=1
-let NERDTreeShowHidden=1
-let NERDTreeShowLineNumbers=1
-let NERDTreeWinPos='left'
-let NERDTreeWinSize=25
-nnoremap f :NERDTreeToggle
-map <F7> :NERDTree<CR>  
+  if &filetype ==# 'sh'
+    call setline(1, '#!/usr/bin/env bash')
+    call append(1, '# Copyright ' . strftime('%Y') . ' lilde90. All Rights Reserved.')
+    call append(2, '# Author: Pan Li (panli.me@gmail.com)')
+    call append(3, '#')
+  else
+    call setline(1, '// Copyright ' . strftime('%Y') . ' lilde90. All Rights Reserved.')
+    call append(1, '// Author: Pan Li (panli.me@gmail.com)')
+    call append(2, '//')
+  endif
 
-"setting for Taglist
-let Tlist_Auto_Open=0
-let Tlist_Ctags_Cmd = '/usr/bin/ctags'
-let Tlist_Use_Right_Window = 1
-""let Tlist_Show_One_File = 2
-let Tlist_Exit_OnlyWindow = 1
-"global <c-]>
-nmap <c-]> g<c-]>
+  normal! G
+endfunction
 
-"relative number configuration
-function! NumberToggle()
-    if(&relativenumber == 1)
-        set number
+function! CompileRunGcc() abort
+  write
+
+  let l:file = expand('%:p')
+  let l:binary = expand('%:p:r')
+
+  if &filetype ==# 'c'
+    execute '!cc -Wall ' . shellescape(l:file) . ' -o ' . shellescape(l:binary)
+    execute '!' . shellescape(l:binary)
+  elseif &filetype ==# 'cpp'
+    execute '!c++ -Wall ' . shellescape(l:file) . ' -o ' . shellescape(l:binary)
+    execute '!' . shellescape(l:binary)
+  elseif &filetype ==# 'java'
+    execute '!javac ' . shellescape(l:file)
+    execute '!java -cp ' . shellescape(expand('%:p:h')) . ' ' . expand('%:t:r')
+  elseif &filetype ==# 'sh'
+    execute '!bash ' . shellescape(l:file)
+  elseif &filetype ==# 'py'
+    if executable('python3')
+      execute '!python3 ' . shellescape(l:file)
+    elseif executable('python')
+      execute '!python ' . shellescape(l:file)
     else
-        set relativenumber
+      call s:EchoError('No python interpreter found (python3/python).')
     endif
-endfunc
-:au FocusLost * :set number
-:au FocusGained * :set relativenumber
-autocmd InsertEnter * :set number
-autocmd InsertLeave * :set relativenumber
-nnoremap <C-n> :call NumberToggle()<cr>
+  else
+    call s:EchoError('CompileRunGcc() does not support filetype: ' . &filetype)
+  endif
+endfunction
 
-"Disable arrow keys in normal mode
-nmap <Left> <Nop>
-nmap <Right> <Nop>
-nmap <Up> <Nop>
-nmap <Down> <Nop>
+function! RunGdb() abort
+  write
 
-let OmniCpp_MayCompleteDot=1
+  let l:file = expand('%:p')
+  let l:binary = expand('%:p:r')
+  let l:compiler = &filetype ==# 'c' ? 'cc' : 'c++'
 
-"syntastic setting"
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 0
-"let g:syntastic_check_on_wq = 0
+  execute '!' . l:compiler . ' -g ' . shellescape(l:file) . ' -o ' . shellescape(l:binary)
+  execute '!gdb ' . shellescape(l:binary)
+endfunction
+
+function! NumberToggle() abort
+  if &relativenumber
+    set norelativenumber
+  else
+    set relativenumber
+  endif
+endfunction
+
+function! s:FindSupportedCtags() abort
+  for l:cmd in ['ctags', 'uctags', 'universal-ctags', 'exuberant-ctags']
+    if !executable(l:cmd)
+      continue
+    endif
+
+    let l:version = join(systemlist(shellescape(exepath(l:cmd)) . ' --version'), "\n")
+    if l:version =~? 'Universal Ctags\|Exuberant Ctags'
+      return exepath(l:cmd)
+    endif
+  endfor
+
+  return ''
+endfunction
+
+function! s:AddTags(path) abort
+  let l:path = expand(a:path)
+  if filereadable(l:path)
+    execute 'set tags+=' . fnameescape(l:path)
+  endif
+endfunction
+
+function! s:AddCscope(db, root) abort
+  let l:db = expand(a:db)
+  let l:root = expand(a:root)
+
+  if has('cscope') && filereadable(l:db) && isdirectory(l:root)
+    execute 'silent! cs add ' . fnameescape(l:db) . ' ' . fnameescape(l:root)
+  endif
+endfunction
+
+augroup lilde90_filetypes
+  autocmd!
+  autocmd BufRead,BufNewFile * if &filetype ==# '' | setfiletype text | endif
+  autocmd BufNewFile *.c,*.h,*.cpp,*.hpp,*.sh,*.java,*.idl call SetTitle()
+  autocmd FileType c setlocal makeprg=cc\ -Wall\ %:S\ -o\ %<:S
+  autocmd FileType cpp setlocal makeprg=c++\ -Wall\ %:S\ -o\ %<:S
+  autocmd FileType c,cpp nnoremap <buffer> <leader><Space> :write<CR>:make<CR>
+augroup END
+
+augroup lilde90_numbers
+  autocmd!
+  autocmd FocusLost,InsertEnter * set norelativenumber
+  autocmd FocusGained,InsertLeave * set relativenumber
+augroup END
+
+nnoremap <F12> gg=G
+if has('clipboard')
+  vnoremap <C-c> "+y
+endif
+nnoremap <F2> :g/^\s*$/d<CR>
+nnoremap <C-F2> :vert diffsplit<Space>
+nnoremap <M-F2> :tabnew<CR>
+nnoremap <F3> :tabnew .<CR>
+nnoremap <C-F3> <Leader>be
+nnoremap <F5> :call CompileRunGcc()<CR>
+nnoremap <F7> :NERDTree<CR>
+nnoremap <F8> :call RunGdb()<CR>
+nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <C-n> :call NumberToggle()<CR>
+
+inoremap ( ()<Left>
+inoremap <expr> ) <SID>ClosePair(')')
+inoremap [ []<Left>
+inoremap <expr> ] <SID>ClosePair(']')
+inoremap <expr> } <SID>ClosePair('}')
+
+nnoremap <Left> <Nop>
+nnoremap <Right> <Nop>
+nnoremap <Up> <Nop>
+nnoremap <Down> <Nop>
+
+call s:AddTags('~/code/tags')
+call s:AddTags('~/github/tags')
+call s:AddCscope('~/code/cscope.out', '~/code')
+call s:AddCscope('~/github/cscope.out', '~/github')
+
+let g:NERDChristmasTree = 1
+let g:NERDTreeAutoCenter = 1
+let g:NERDTreeBookmarksFile = expand('~/.vim/.NERDTreeBookmarks')
+let g:NERDTreeMouseMode = 2
+let g:NERDTreeShowBookmarks = 1
+let g:NERDTreeShowFiles = 1
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeShowLineNumbers = 1
+let g:NERDTreeWinPos = 'left'
+let g:NERDTreeWinSize = 25
+
+let g:Tlist_Auto_Open = 0
+let g:Tlist_Use_Right_Window = 1
+let g:Tlist_Exit_OnlyWindow = 1
+
+let s:ctags_cmd = s:FindSupportedCtags()
+if !empty(s:ctags_cmd)
+  let g:Tlist_Ctags_Cmd = s:ctags_cmd
+else
+  let loaded_taglist = 1
+endif
+
+nnoremap <C-]> g<C-]>
+let OmniCpp_MayCompleteDot = 1
