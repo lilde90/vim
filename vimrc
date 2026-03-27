@@ -8,6 +8,11 @@ syntax on
 filetype plugin indent on
 
 colorscheme desert
+" 让文本背景透明
+highlight Normal ctermbg=NONE guibg=NONE
+highlight NonText ctermbg=NONE guibg=NONE
+highlight LineNr ctermbg=NONE guibg=NONE
+highlight SignColumn ctermbg=NONE guibg=NONE
 
 set novisualbell
 set vb
