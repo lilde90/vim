@@ -1,9 +1,5 @@
 " vimrc configuration file by lilde90
 
-if &compatible
-  set nocompatible
-endif
-
 syntax on
 filetype plugin indent on
 
@@ -35,10 +31,7 @@ set magic
 set backspace=indent,eol,start
 set whichwrap+=<,>,h,l
 set mouse=a
-set selection=exclusive
-set selectmode=mouse,key
 set report=0
-set viminfo+=!
 
 set autoindent
 set smartindent
@@ -52,7 +45,6 @@ set smarttab
 
 set hlsearch
 set incsearch
-set gdefault
 set showmatch
 set matchtime=1
 
@@ -62,18 +54,16 @@ set foldcolumn=0
 set foldenable
 
 set completeopt=menu,longest
-set iskeyword+=_,$,@,%,#,-
+set iskeyword+=_,$,@,%,#
 
 set nobackup
 set noswapfile
 
-if has('clipboard')
-  set clipboard+=unnamed
-endif
-
-if has('gui_running')
-  set guioptions=
-  set linespace=0
+" Clipboard integration for macOS/Linux
+if has('unnamedplus')
+  set clipboard=unnamedplus,unnamed
+elseif has('clipboard')
+  set clipboard=unnamed
 endif
 
 function! s:EchoError(message) abort
