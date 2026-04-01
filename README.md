@@ -1,75 +1,77 @@
 # Vim and tmux configuration
 
-这个仓库保存了常用的 Vim 和 tmux 配置文件：
+这个仓库保存了常用的 Vim、tmux 以及 Zsh 配置文件。
 
-- `vimrc`
-- `tmux.conf`
-- `tmux-panes`
+## 包含文件
+
+- `vimrc`: Vim 配置文件
+- `vim/`: Vim 插件及相关配置
+- `tmux.conf`: tmux 配置文件
+- `tmux-panes`: tmux 面板管理脚本
+- `p10k.zsh`: Powerlevel10k Zsh 主题配置
+
+---
+
+## Vim 快捷键与特性
+
+当前配置使用 `desert` 主题，并启用了 **背景透明**，适合在支持透明度的终端中使用。
+
+### 常用快捷键
+
+| 功能 | 快捷键 | 说明 |
+| --- | --- | --- |
+| 自动缩进全文 | `F12` | 执行 `gg=G` |
+| 删除所有空行 | `F2` | 清理代码中的多余空行 |
+| 垂直对比 | `Ctrl-F2` | 开启垂直分屏对比 |
+| 新建标签页 | `Alt-F2` / `F3` | 快速开启新 tab |
+| 编译并运行 | `F5` | 支持 C, C++, Java, Shell, Python |
+| GDB 调试 | `F8` | 自动带 `-g` 编译并启动 GDB |
+| NERDTree | `F7` / `<leader>n` | 开启/切换文件浏览器 |
+| 切换行号模式 | `Ctrl-n` | 在相对行号与绝对行号间切换 |
+| 保存并 Make | `<leader><Space>` | C/C++ 专用，保存并执行 `make` |
+
+### 核心特性
+
+- **自动文件头**: 新建 `.sh`, `.c`, `.cpp`, `.java` 等文件时自动生成作者信息和日期。
+- **括号自动补全**: 输入 `(`, `[`, `{` 自动补全另一半并定位光标。
+- **剪贴板共享**: 自动根据系统（macOS/Linux）集成系统剪贴板。
+- **搜索优化**: 启用高亮搜索、递进搜索及匹配括号高亮。
+- **鼠标支持**: 启用了 `set mouse=a`，支持滚动和点击。
+
+---
 
 ## tmux 快捷键速查
 
 当前 `tmux.conf` 将前缀键改成了 `Ctrl-a`，默认的 `Ctrl-b` 已禁用。
 
-### 常用操作
+### 面板与窗口管理
 
 | 功能 | 快捷键 | 说明 |
 | --- | --- | --- |
 | 重新加载配置 | `Ctrl-a r` | 重新读取 `~/.tmux.conf` |
 | 发送前缀给程序 | `Ctrl-a Ctrl-a` | 将字面量 `Ctrl-a` 发送给当前 pane 内程序 |
-| 左右分屏 | `Ctrl-a \|` | 基础分屏 |
-| 上下分屏 | `Ctrl-a -` | 基础分屏 |
-| 左右分屏 | `Ctrl-a v` | 继承当前 pane 工作目录 |
-| 上下分屏 | `Ctrl-a n` | 继承当前 pane 工作目录 |
-| 切到左侧 pane | `Ctrl-a h` | Vim 风格方向键 |
-| 切到下方 pane | `Ctrl-a j` | Vim 风格方向键 |
-| 切到上方 pane | `Ctrl-a k` | Vim 风格方向键 |
-| 切到右侧 pane | `Ctrl-a l` | Vim 风格方向键 |
-| 上一个 window | `Ctrl-a Ctrl-h` | 可按住连续切换 |
-| 下一个 window | `Ctrl-a Ctrl-l` | 可按住连续切换 |
-| 向左缩 pane | `Ctrl-a H` | 每次调整 5 格 |
-| 向下扩 pane | `Ctrl-a J` | 每次调整 5 格 |
-| 向上缩 pane | `Ctrl-a K` | 每次调整 5 格 |
-| 向右扩 pane | `Ctrl-a L` | 每次调整 5 格 |
-| 粘贴 tmux buffer | `Ctrl-a p` | 粘贴 tmux 内部缓冲区内容 |
-| tmux buffer 复制到系统剪贴板 | `Ctrl-a Ctrl-c` | 使用 macOS `pbcopy` |
-| 从系统剪贴板粘贴到 pane | `Ctrl-a Ctrl-v` | 使用 macOS `pbpaste` |
+| 左右分屏 | `Ctrl-a \|` / `Ctrl-a v` | `v` 会继承当前工作目录 |
+| 上下分屏 | `Ctrl-a -` / `Ctrl-a n` | `n` 会继承当前工作目录 |
+| 切换 pane | `Ctrl-a h/j/k/l` | Vim 风格方向键 |
+| 切换 window | `Ctrl-a Ctrl-h/l` | 上一个/下一个 window |
+| 调整 pane 大小 | `Ctrl-a H/J/K/L` | 每次调整 5 格 |
 
-## pane 内复制与粘贴
+### 复制与粘贴
 
-配置启用了 `vi` 风格复制模式，因此 pane 内复制推荐使用下面的流程。
-
-### 复制到 tmux buffer
+配置启用了 `vi` 风格复制模式：
 
 1. 按 `Ctrl-a [` 进入 copy-mode。
-2. 用 `h` `j` `k` `l` 或其他 vi 风格移动键移动光标。
-3. 按 `v` 开始选择文本。
-4. 移动光标扩展选区。
-5. 按 `y` 复制选区，并退出 copy-mode。
+2. 用 `v` 开始选择文本，`y` 复制选区并退出。
+3. **粘贴 tmux buffer**: `Ctrl-a p`。
+4. **复制到系统剪贴板**: `Ctrl-a Ctrl-c` (macOS `pbcopy` / Linux `xclip`)。
+5. **从系统剪贴板粘贴**: `Ctrl-a Ctrl-v`。
 
-这时内容进入 tmux 自己的 buffer。
+---
 
-### 粘贴 tmux buffer
+## Zsh 配置
 
-在目标 pane 中按 `Ctrl-a p`，将 tmux buffer 的内容直接粘贴进去。
+集成了 `p10k.zsh` (Powerlevel10k)，提供美观且功能丰富的终端提示符。
 
-### 复制到 macOS 系统剪贴板
-
-如果希望把刚复制的内容交给系统剪贴板：
-
-1. 先按上面的步骤将内容复制到 tmux buffer。
-2. 再按 `Ctrl-a Ctrl-c`。
-
-这样 tmux 当前 buffer 会通过 `pbcopy` 写入 macOS 系统剪贴板。
-
-### 从 macOS 系统剪贴板粘贴到 pane
-
-按 `Ctrl-a Ctrl-v`。
-
-这个绑定会通过 `pbpaste` 读取系统剪贴板，并将内容粘贴到当前 pane。
-
-## 两种粘贴的区别
-
-- `Ctrl-a p` 粘贴的是 tmux buffer。
-- `Ctrl-a Ctrl-v` 粘贴的是 macOS 系统剪贴板。
-- 如果只是 pane 之间复制粘贴，通常用 `Ctrl-a [` -> `v` -> `y` -> `Ctrl-a p` 就够了。
-- 如果要和其他 macOS 应用共享复制内容，再额外执行 `Ctrl-a Ctrl-c`。
+- **图标支持**: 需要安装 [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)。
+- **即时响应**: 采用 Instant Prompt 技术，终端启动更迅速。
+- **Git 集成**: 实时显示分支、待提交项、冲突等状态。
