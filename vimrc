@@ -66,6 +66,96 @@ elseif has('clipboard')
   set clipboard=unnamed
 endif
 
+" Mouse selections copy through tmux when available, otherwise fall back to
+" OSC 52 or desktop clipboard tools.
+function! s:RestoreRegister(name, info) abort
+  call setreg(a:name, get(a:info, 'regcontents', []), get(a:info, 'regtype', 'v'))
+endfunction
+
+function! s:SelectionText(reginfo) abort
+  let l:text = join(get(a:reginfo, 'regcontents', []), "\n")
+  if get(a:reginfo, 'regtype', '') =~# '^V'
+    let l:text .= "\n"
+  endif
+  return l:text
+endfunction
+
+function! s:SendOsc52(text) abort
+  if empty(a:text) || !executable('python3')
+    return 0
+  endif
+
+  let l:script = 'import base64,sys; data=sys.stdin.buffer.read(); sys.stdout.write("\033]52;c;" + base64.b64encode(data).decode("ascii") + "\a")'
+  call system('python3 -c ' . shellescape(l:script) . ' > /dev/tty', a:text)
+  return v:shell_error == 0
+endfunction
+
+function! s:CopyTextToClipboard(text) abort
+  if empty(a:text)
+    return 0
+  endif
+
+  if exists('$TMUX') && !empty($TMUX) && executable('tmux')
+    call system('tmux load-buffer -w -', a:text)
+    return v:shell_error == 0
+  endif
+
+  if executable('pbcopy')
+    call system('pbcopy', a:text)
+    return v:shell_error == 0
+  endif
+
+  if executable('wl-copy') && !empty($WAYLAND_DISPLAY)
+    call system('wl-copy', a:text)
+    return v:shell_error == 0
+  endif
+
+  if executable('xclip') && !empty($DISPLAY)
+    call system('xclip -in -selection clipboard', a:text)
+    return v:shell_error == 0
+  endif
+
+  return s:SendOsc52(a:text)
+endfunction
+
+function! s:WarnClipboardUnavailable() abort
+  if get(s:, 'clipboard_warning_shown', 0)
+    return
+  endif
+
+  let s:clipboard_warning_shown = 1
+  echohl WarningMsg
+  echom 'Mouse copy could not reach a system clipboard in this session.'
+  echohl None
+endfunction
+
+function! s:CopyMouseSelection() abort
+  let l:mode = mode()
+  if l:mode !=# 'v' && l:mode !=# 'V' && l:mode !=# "\<C-v>" && l:mode !=# 's' && l:mode !=# 'S'
+    return
+  endif
+
+  let l:saved_quote = getreginfo('"')
+  let l:saved_zero = getreginfo('0')
+  let l:saved_z = getreginfo('z')
+
+  silent normal! "zy
+
+  let l:selection = getreginfo('z')
+  let l:text = s:SelectionText(l:selection)
+
+  call s:RestoreRegister('"', l:saved_quote)
+  call s:RestoreRegister('0', l:saved_zero)
+  call s:RestoreRegister('z', l:saved_z)
+
+  if !s:CopyTextToClipboard(l:text)
+    call s:WarnClipboardUnavailable()
+  endif
+
+  " Re-enter Visual mode so the mouse selection stays highlighted.
+  silent! normal! gv
+endfunction
+
 function! s:EchoError(message) abort
   echohl ErrorMsg
   echom a:message
@@ -197,6 +287,8 @@ nnoremap <F12> gg=G
 if has('clipboard')
   vnoremap <C-c> "+y
 endif
+noremap <silent> <LeftRelease> <LeftRelease><Cmd>call <SID>CopyMouseSelection()<CR>
+noremap <silent> <RightRelease> <RightRelease><Cmd>call <SID>CopyMouseSelection()<CR>
 nnoremap <F2> :g/^\s*$/d<CR>
 nnoremap <C-F2> :vert diffsplit<Space>
 nnoremap <M-F2> :tabnew<CR>
