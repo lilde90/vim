@@ -237,37 +237,6 @@ function! NumberToggle() abort
   endif
 endfunction
 
-function! s:FindSupportedCtags() abort
-  for l:cmd in ['ctags', 'uctags', 'universal-ctags', 'exuberant-ctags']
-    if !executable(l:cmd)
-      continue
-    endif
-
-    let l:version = join(systemlist(shellescape(exepath(l:cmd)) . ' --version'), "\n")
-    if l:version =~? 'Universal Ctags\|Exuberant Ctags'
-      return exepath(l:cmd)
-    endif
-  endfor
-
-  return ''
-endfunction
-
-function! s:AddTags(path) abort
-  let l:path = expand(a:path)
-  if filereadable(l:path)
-    execute 'set tags+=' . fnameescape(l:path)
-  endif
-endfunction
-
-function! s:AddCscope(db, root) abort
-  let l:db = expand(a:db)
-  let l:root = expand(a:root)
-
-  if has('cscope') && filereadable(l:db) && isdirectory(l:root)
-    execute 'silent! cs add ' . fnameescape(l:db) . ' ' . fnameescape(l:root)
-  endif
-endfunction
-
 augroup lilde90_filetypes
   autocmd!
   autocmd BufRead,BufNewFile * if &filetype ==# '' | setfiletype text | endif
@@ -311,11 +280,6 @@ nnoremap <Right> <Nop>
 nnoremap <Up> <Nop>
 nnoremap <Down> <Nop>
 
-call s:AddTags('~/code/tags')
-call s:AddTags('~/github/tags')
-call s:AddCscope('~/code/cscope.out', '~/code')
-call s:AddCscope('~/github/cscope.out', '~/github')
-
 let g:NERDChristmasTree = 1
 let g:NERDTreeAutoCenter = 1
 let g:NERDTreeBookmarksFile = expand('~/.vim/.NERDTreeBookmarks')
@@ -326,17 +290,4 @@ let g:NERDTreeShowHidden = 1
 let g:NERDTreeShowLineNumbers = 1
 let g:NERDTreeWinPos = 'left'
 let g:NERDTreeWinSize = 25
-
-let g:Tlist_Auto_Open = 0
-let g:Tlist_Use_Right_Window = 1
-let g:Tlist_Exit_OnlyWindow = 1
-
-let s:ctags_cmd = s:FindSupportedCtags()
-if !empty(s:ctags_cmd)
-  let g:Tlist_Ctags_Cmd = s:ctags_cmd
-else
-  let loaded_taglist = 1
-endif
-
-nnoremap <C-]> g<C-]>
 let OmniCpp_MayCompleteDot = 1
