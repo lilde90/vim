@@ -7,7 +7,6 @@
 - `vimrc`: Vim 配置文件
 - `vim/`: Vim 插件及相关配置
 - `tmux.conf`: tmux 配置文件
-- `tmux-panes`: tmux 面板管理脚本
 - `p10k.zsh`: Powerlevel10k Zsh 主题配置
 
 ---
