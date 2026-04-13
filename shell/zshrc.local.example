@@ -1,0 +1,8 @@
+# Copy any machine-specific PATH updates, aliases, and private environment
+# variables here. This file is intentionally not linked back into the repo.
+
+# export PATH="$HOME/.local/bin:$PATH"
+# alias python3="/opt/homebrew/bin/python3"
+
+# Example secrets:
+# export EXAMPLE_API_KEY="replace-me"
