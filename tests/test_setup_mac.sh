@@ -23,3 +23,10 @@ if grep -q "No such file or directory" "$dry_run_log"; then
   cat "$dry_run_log" >&2
   exit 1
 fi
+
+rg -q "cp .*zshrc.local.example" "$dry_run_log"
+rg -q "cp -R .*vim" "$dry_run_log"
+if rg -q "ln -s" "$dry_run_log"; then
+  cat "$dry_run_log" >&2
+  exit 1
+fi

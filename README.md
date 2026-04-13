@@ -117,7 +117,7 @@ DRY_RUN=1 ./scripts/setup-mac.sh
 - 从 `https://github.com/thep0y/monaco-nerd-font/releases/tag/v0.2.1` 下载四个 Monaco 字体 zip，并解压到 `~/Library/Fonts`
 - 安装 Oh My Zsh
 - 安装 `powerlevel10k`、`zsh-autosuggestions`、`zsh-completions`、`zsh-syntax-highlighting`
-- 软链接 `~/.vimrc`、`~/.vim`、`~/.tmux.conf`、`~/.p10k.zsh`、`~/.zshrc`、`~/.zprofile`
+- 复制 `~/.vimrc`、`~/.vim`、`~/.tmux.conf`、`~/.p10k.zsh`、`~/.zshrc`、`~/.zprofile`
 - 如果 `~/.zshrc.local` 不存在，则从 `zshrc.local.example` 复制一份
 - 导入 `com.googlecode.iterm2.plist`
 
@@ -127,6 +127,7 @@ DRY_RUN=1 ./scripts/setup-mac.sh
 - macOS 隐私授权：例如辅助功能、自动化、输入监控
 - 语言工具链：例如 Java、Go、Node.js、Docker 等，按项目需要再安装
 - `gdb`：macOS 上通常还需要额外 code signing，脚本不会自动处理
+- 如果你后续修改了仓库里的配置，想同步到家目录，请重新运行一次脚本
 
 ### 恢复后检查
 

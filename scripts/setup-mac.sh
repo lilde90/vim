@@ -46,7 +46,7 @@ What it restores:
   - iTerm2 and font-maple-mono-nf-cn casks
   - Monaco nerd font zips (MonacoLigaturizedNerdFont.zip and friends) into ~/Library/Fonts
   - Oh My Zsh, Powerlevel10k, and Zsh plugins
-  - ~/.vimrc, ~/.vim, ~/.tmux.conf, ~/.p10k.zsh, ~/.zshrc, ~/.zprofile
+  - copied ~/.vimrc, ~/.vim, ~/.tmux.conf, ~/.p10k.zsh, ~/.zshrc, ~/.zprofile
   - ~/.zshrc.local from zshrc.local.example if missing
   - iTerm2 preferences from com.googlecode.iterm2.plist
 
@@ -151,23 +151,23 @@ backup_existing() {
   run mv "$path" "$backup"
 }
 
-link_repo_file() {
+copy_repo_path() {
   local src="$1"
   local dest="$2"
 
   mkdir -p "$(dirname "$dest")"
 
-  if [ -L "$dest" ] && [ "$(readlink "$dest")" = "$src" ]; then
-    log "Link already in place: $dest"
-    return 0
-  fi
-
   if [ -e "$dest" ] || [ -L "$dest" ]; then
     backup_existing "$dest"
   fi
 
-  log "Linking $dest -> $src"
-  run ln -s "$src" "$dest"
+  if [ -d "$src" ]; then
+    log "Copying directory $src -> $dest"
+    run cp -R "$src" "$dest"
+  else
+    log "Copying file $src -> $dest"
+    run cp "$src" "$dest"
+  fi
 }
 
 write_local_example_if_missing() {
@@ -278,13 +278,13 @@ main() {
   clone_or_update_repo https://github.com/zsh-users/zsh-completions.git "$plugins_dir/zsh-completions"
   clone_or_update_repo https://github.com/zsh-users/zsh-syntax-highlighting.git "$plugins_dir/zsh-syntax-highlighting"
 
-  log "Linking shared dotfiles"
-  link_repo_file "$REPO_DIR/vimrc" "$TARGET_HOME/.vimrc"
-  link_repo_file "$REPO_DIR/vim" "$TARGET_HOME/.vim"
-  link_repo_file "$REPO_DIR/tmux.conf" "$TARGET_HOME/.tmux.conf"
-  link_repo_file "$REPO_DIR/p10k.zsh" "$TARGET_HOME/.p10k.zsh"
-  link_repo_file "$REPO_DIR/shell/zshrc" "$TARGET_HOME/.zshrc"
-  link_repo_file "$REPO_DIR/shell/zprofile" "$TARGET_HOME/.zprofile"
+  log "Copying shared dotfiles"
+  copy_repo_path "$REPO_DIR/vimrc" "$TARGET_HOME/.vimrc"
+  copy_repo_path "$REPO_DIR/vim" "$TARGET_HOME/.vim"
+  copy_repo_path "$REPO_DIR/tmux.conf" "$TARGET_HOME/.tmux.conf"
+  copy_repo_path "$REPO_DIR/p10k.zsh" "$TARGET_HOME/.p10k.zsh"
+  copy_repo_path "$REPO_DIR/shell/zshrc" "$TARGET_HOME/.zshrc"
+  copy_repo_path "$REPO_DIR/shell/zprofile" "$TARGET_HOME/.zprofile"
   write_local_example_if_missing "$REPO_DIR/shell/zshrc.local.example" "$TARGET_HOME/.zshrc.local"
 
   import_iterm2_prefs
